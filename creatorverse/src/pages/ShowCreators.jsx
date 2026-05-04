@@ -1,7 +1,7 @@
 import React from 'react';
 
-const showCreators = () => {
+const ShowCreators = () => {
 
 }
 
-export default showCreators;
+export default ShowCreators;
