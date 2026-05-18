@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../client.js';
 
-const EditCreator = () => {
+const EditCreator = ({ onCreatorUpdated, onCreatorDeleted }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [creator, setCreator] = useState({
@@ -83,6 +83,7 @@ const EditCreator = () => {
       description: data.description ?? '',
       imageURL: data.imageURL ?? data.image_url ?? '',
     });
+    await onCreatorUpdated?.();
     setMessage('Creator updated successfully.');
   };
 
@@ -100,6 +101,7 @@ const EditCreator = () => {
       return;
     }
 
+    await onCreatorDeleted?.();
     navigate('/');
   };
 
