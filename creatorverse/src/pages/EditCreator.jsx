@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../client.js';
 
 const EditCreator = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [creator, setCreator] = useState({
     name: '',
     url: '',
@@ -85,6 +86,23 @@ const EditCreator = () => {
     setMessage('Creator updated successfully.');
   };
 
+  const deleteCreator = async () => {
+    setMessage('');
+
+    const { error } = await supabase
+      .from('creators')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting creator:', error);
+      setMessage('Unable to delete creator. Please try again.');
+      return;
+    }
+
+    navigate('/');
+  };
+
   if (isLoading) {
     return (
       <main className="edit-creator-page">
@@ -143,6 +161,9 @@ const EditCreator = () => {
           />
         </label>
         <button className="primary-button" type="submit">Save Changes</button>
+        <button className="delete-button" type="button" onClick={deleteCreator}>
+          Delete Creator
+        </button>
       </form>
       {message && <p className="form-message">{message}</p>}
     </main>

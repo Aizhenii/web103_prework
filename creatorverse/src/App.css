@@ -254,6 +254,11 @@ button:hover {
   background: #7c3aed;
 }
 
+.delete-button {
+  color: #fff;
+  background: #dc2626;
+}
+
 .secondary-button {
   color: var(--text-h);
   background: rgba(244, 243, 236, 0.75);
