@@ -1,5 +1,3 @@
-import React from 'react';
-
 const EditCreator = () => {
   return (
     <main className="edit-creator-page">

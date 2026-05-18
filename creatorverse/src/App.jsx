@@ -107,7 +107,7 @@ function App() {
     { path: '/add-creator', element: <AddCreator /> },
     { path: '/edit-creator', element: <EditCreator /> },
     { path: '/show-creators', element: <ShowCreators creators={creators} /> },
-    { path: '/view-creator', element: <ViewCreator /> },
+    { path: '/view-creator/:id', element: <ViewCreator /> },
   ];
 
   return useRoutes(routes);

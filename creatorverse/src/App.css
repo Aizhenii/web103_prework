@@ -360,6 +360,53 @@ button:hover {
   margin-top: 12px;
 }
 
+.view-creator-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: left;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 24px;
+  color: #7c3aed;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.creator-detail-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 28px;
+}
+
+.creator-detail h1 {
+  margin-top: 0;
+}
+
+.creator-detail p {
+  max-width: 720px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.creator-detail a {
+  color: #7c3aed;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.creator-detail a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 720px) {
   .home-hero {
     align-items: stretch;
