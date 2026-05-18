@@ -65,9 +65,6 @@ const ViewCreator = () => {
                         Visit {creator.name}
                     </a>
                 )}
-                <Link className="edit-detail-link" to={`/edit-creator/${creator.id}`}>
-                    Edit Creator
-                </Link>
             </section>
         </main>
     );

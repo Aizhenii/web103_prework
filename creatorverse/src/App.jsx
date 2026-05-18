@@ -106,7 +106,7 @@ function App() {
     { path: '/', element: home },
     { path: '/add-creator', element: <AddCreator /> },
     { path: '/edit-creator/:id', element: <EditCreator /> },
-    { path: '/show-creators', element: <ShowCreators creators={creators} /> },
+    { path: '/show-creators', element: <ShowCreators creators={creators} showHomeLink /> },
     { path: '/view-creator/:id', element: <ViewCreator /> },
   ];
 
