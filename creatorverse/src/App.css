@@ -277,11 +277,23 @@ button:hover {
   text-align: left;
 }
 
+.edit-creator-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: left;
+}
+
 .add-creator-page h1 {
   margin-top: 0;
 }
 
-.add-creator-page > p {
+.edit-creator-page h1 {
+  margin-top: 0;
+}
+
+.add-creator-page > p,
+.edit-creator-page > p {
   margin-bottom: 24px;
 }
 
@@ -398,6 +410,8 @@ button:hover {
 }
 
 .creator-detail a {
+  display: inline-flex;
+  margin-right: 16px;
   color: #7c3aed;
   font-weight: 700;
   text-decoration: none;

@@ -105,7 +105,7 @@ function App() {
   const routes = [
     { path: '/', element: home },
     { path: '/add-creator', element: <AddCreator /> },
-    { path: '/edit-creator', element: <EditCreator /> },
+    { path: '/edit-creator/:id', element: <EditCreator /> },
     { path: '/show-creators', element: <ShowCreators creators={creators} /> },
     { path: '/view-creator/:id', element: <ViewCreator /> },
   ];

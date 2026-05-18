@@ -16,6 +16,9 @@ const Card = ({ creator }) => {
                     Visit Channel
                 </a>
             )}
+            <Link className="edit-link" to={`/edit-creator/${creator.id}`}>
+                Edit
+            </Link>
         </article>
     )
 }

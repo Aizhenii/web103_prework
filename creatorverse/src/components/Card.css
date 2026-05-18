@@ -38,6 +38,8 @@
 }
 
 .Card a {
+  display: inline-flex;
+  margin-right: 14px;
   color: #7c3aed;
   font-weight: 700;
   text-decoration: none;
@@ -45,6 +47,10 @@
 
 .Card a:hover {
   text-decoration: underline;
+}
+
+.edit-link {
+  margin-top: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
