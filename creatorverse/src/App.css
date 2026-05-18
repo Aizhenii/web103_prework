@@ -182,3 +182,278 @@
     border-right-color: var(--border);
   }
 }
+
+.home-page {
+  min-height: 100svh;
+  background:
+    linear-gradient(135deg, rgba(170, 59, 255, 0.08), transparent 32%),
+    linear-gradient(315deg, rgba(20, 184, 166, 0.1), transparent 36%),
+    var(--bg);
+}
+
+.home-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 56px 32px 36px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  width: fit-content;
+  margin-bottom: 12px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: #0f766e;
+  background: rgba(20, 184, 166, 0.12);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.home-hero h1 {
+  max-width: 680px;
+  margin: 0;
+}
+
+.hero-copy {
+  max-width: 580px;
+  margin-top: 16px;
+  font-size: 20px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.primary-button {
+  color: #fff;
+  background: #6dba9d;
+}
+
+.delete-button {
+  color: #fff;
+  background: #dc2626;
+}
+
+.secondary-button {
+  color: var(--text-h);
+  background: rgba(244, 243, 236, 0.75);
+  border: 1px solid var(--border);
+}
+
+.show-creators-page {
+  padding: 32px 0 48px;
+}
+
+.show-creators-page h2 {
+  margin: 0 0 22px;
+  padding: 0 32px;
+  text-align: left;
+}
+
+.add-creator-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: left;
+}
+
+.edit-creator-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: left;
+}
+
+.add-creator-page h1 {
+  margin-top: 0;
+}
+
+.edit-creator-page h1 {
+  margin-top: 0;
+}
+
+.add-creator-page > p,
+.edit-creator-page > p {
+  margin-bottom: 24px;
+}
+
+.creator-form {
+  display: grid;
+  gap: 18px;
+}
+
+.creator-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--text-h);
+  font-weight: 700;
+}
+
+.creator-form input,
+.creator-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text-h);
+  background: var(--bg);
+  font: inherit;
+}
+
+.creator-form textarea {
+  resize: vertical;
+}
+
+.form-message {
+  margin-top: 18px;
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(8, 6, 13, 0.58);
+}
+
+.modal {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: calc(100svh - 48px);
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  box-shadow: 0 24px 80px rgba(8, 6, 13, 0.28);
+}
+
+.modal-form {
+  max-width: none;
+  padding: 36px 28px 28px;
+}
+
+.close-button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  padding: 8px 10px;
+  color: var(--text-h);
+  background: var(--social-bg);
+  border: 1px solid var(--border);
+}
+
+.modal-done-button {
+  margin-top: 12px;
+}
+
+.view-creator-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  text-align: left;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 24px;
+  color: #7c3aed;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.creator-detail-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 28px;
+}
+
+.creator-detail h1 {
+  margin-top: 0;
+}
+
+.creator-detail p {
+  max-width: 720px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.creator-detail a {
+  display: inline-flex;
+  margin-right: 16px;
+  color: #7c3aed;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.creator-detail a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+  .home-hero {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 36px 20px 28px;
+  }
+
+  .hero-copy {
+    font-size: 17px;
+  }
+
+  .hero-actions {
+    justify-content: stretch;
+  }
+
+  .hero-actions button {
+    flex: 1 1 160px;
+  }
+
+  .show-creators-page h2 {
+    padding: 0 20px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal-form {
+    padding: 48px 20px 24px;
+  }
+}

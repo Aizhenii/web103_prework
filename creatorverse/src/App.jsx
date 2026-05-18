@@ -1,130 +1,116 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { useRoutes } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useRoutes, useNavigate } from 'react-router-dom';
+import { supabase } from './client.js';
 
 import AddCreator from './pages/AddCreator';
 import EditCreator from './pages/EditCreator';
-import showCreators from './pages/ShowCreators';
-import ViewCreators from './pages/ViewCreators';
+import ShowCreators from './pages/ShowCreators';
+import ViewCreator from './pages/ViewCreator';
 
 import './App.css'
 
-
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+  const [creators, setCreators] = useState([]);
+  const [isAddCreatorOpen, setIsAddCreatorOpen] = useState(false);
+  
+  const addCreator = () => {
+    setIsAddCreatorOpen(true);
+  }
+  const showCreators = () => {
+    // make database call to supabase 
+    navigate('/show-creators');
+  }
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+  const refreshCreators = async () => {
+    const { data, error } = await supabase
+      .from('creators')
+      .select();
+
+    if (error) {
+      console.error('Error fetching creators:', error);
+      return;
+    }
+
+    setCreators(data ?? []);
+  };
+
+  useEffect(() => {
+    const fetchCreators = async () => {
+      const { data, error } = await supabase
+        .from('creators')
+        .select();
+
+      if (error) {
+        console.error('Error fetching creators:', error);
+        return;
+      }
+
+      setCreators(data ?? []);
+    };
+
+    fetchCreators();
+  }, []);
+
+  const home = (
+    <main className="home-page">
+      <section className="home-hero">
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+          <p className="eyebrow">Creatorverse</p>
+          <h1>Discover your favorite creators</h1>
+          <p className="hero-copy">
+            Keep track of inspiring channels, links, and profiles all in one place.
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div className="hero-actions">
+          <button className="primary-button" onClick={addCreator}>
+            Add Creator
+          </button>
+          <button className="secondary-button" onClick={showCreators}>
+            View All
+          </button>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <ShowCreators creators={creators} title="Featured Creators" />
+
+      {isAddCreatorOpen && (
+        <div className="modal-overlay" onClick={() => setIsAddCreatorOpen(false)}>
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="add-creator-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="close-button"
+              type="button"
+              aria-label="Close add creator form"
+              onClick={() => setIsAddCreatorOpen(false)}
+            >
+              Close
+            </button>
+            <AddCreator
+              isModal
+              onClose={() => setIsAddCreatorOpen(false)}
+              onCreatorAdded={refreshCreators}
+            />
+          </div>
+        </div>
+      )}
+    </main>
+  );
+
+  const routes = [
+    { path: '/', element: home },
+    { path: '/add-creator', element: <AddCreator /> },
+    { path: '/edit-creator/:id', element: <EditCreator onCreatorUpdated={refreshCreators} onCreatorDeleted={refreshCreators} /> },
+    { path: '/show-creators', element: <ShowCreators creators={creators} showHomeLink /> },
+    { path: '/view-creator/:id', element: <ViewCreator /> },
+  ];
+
+  return useRoutes(routes);
 }
 
 export default App
